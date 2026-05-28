@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin stats — Resume AI Tailor</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">Resume AI Tailor</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="upload.html">Try it</a>
+                <a href="compare.html">Compare</a>
+                <a href="admin-stats.html" class="active">Stats</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Experiment statistics</h1>
+            <p class="page-intro">
+                Aggregated metrics across all experiments stored in this browser.
+                Used for the empirical study in Chapter 3 of the thesis.
+            </p>
+
+            <section class="card">
+                <h2>Overall counts</h2>
+                <ul id="counts" class="counts-list">
+                    <!-- filled by JS -->
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2>Average metrics by strategy</h2>
+                <table class="metrics-table">
+                    <thead>
+                        <tr>
+                            <th>Strategy</th>
+                            <th>Runs</th>
+                            <th>Avg ATS %</th>
+                            <th>Avg Hallucination %</th>
+                            <th>Avg Tailoring</th>
+                            <th>Avg Flesch</th>
+                        </tr>
+                    </thead>
+                    <tbody id="avg-body"></tbody>
+                </table>
+            </section>
+
+            <section class="card">
+                <h2>Full experiment log</h2>
+                <table class="metrics-table small">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Strategy</th>
+                            <th>ATS %</th>
+                            <th>Hall %</th>
+                            <th>Tailoring</th>
+                            <th>Flesch</th>
+                        </tr>
+                    </thead>
+                    <tbody id="log-body"></tbody>
+                </table>
+            </section>
+
+            <div class="actions">
+                <button id="export-json" class="btn">Export JSON</button>
+                <button id="export-csv" class="btn">Export CSV</button>
+                <button id="clear-all" class="btn btn-danger">Clear all data</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Resume AI Tailor — Bachelor Thesis Project, RNU 42484</p>
+        </div>
+    </footer>
+
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
