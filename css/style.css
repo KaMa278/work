@@ -108,4 +108,568 @@ a { color: var(--primary); }
     cursor: pointer;
     transition: all 0.2s;
 }
-.btn:hover { background: var
+/* === BUTTONS (continued) === */
+.btn:hover {
+    background: var(--bg);
+    border-color: var(--primary);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+.btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: #ffffff;
+}
+
+.btn-lg {
+    padding: 16px 32px;
+    font-size: 17px;
+}
+
+.btn-danger {
+    background: var(--card-bg);
+    color: var(--danger);
+    border-color: var(--danger);
+}
+.btn-danger:hover {
+    background: var(--danger);
+    color: #ffffff;
+}
+
+/* === CARDS === */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+}
+
+/* === FEATURES GRID (index.html) === */
+.features { padding: 60px 0; }
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.feature-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+/* === HOW IT WORKS (index.html) === */
+.how-it-works {
+    padding: 60px 0;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 24px 0;
+    max-width: 700px;
+}
+
+.steps li {
+    counter-increment: step;
+    padding: 14px 0 14px 56px;
+    position: relative;
+    font-size: 16px;
+}
+
+.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0; top: 12px;
+    width: 36px; height: 36px;
+    background: var(--primary);
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.research-note {
+    padding: 60px 0;
+    background: #f1f5f9;
+}
+.research-note p {
+    max-width: 700px;
+    color: var(--text-light);
+}
+
+/* === FORM (upload.html) === */
+.form-step {
+    border-bottom: 1px solid var(--border);
+    padding: 24px 0;
+}
+.form-step:first-child { padding-top: 0; }
+.form-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    background: var(--primary);
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: inherit;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    transition: border-color 0.2s, background 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: var(--card-bg);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 160px;
+    font-family: inherit;
+}
+
+input[type="file"] {
+    padding: 10px;
+    background: var(--bg);
+    cursor: pointer;
+}
+
+.text-preview {
+    margin-top: 14px;
+    padding: 14px;
+    background: var(--bg);
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.text-preview pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 13px;
+    color: var(--text-light);
+    font-family: inherit;
+}
+
+/* === STRATEGY CARDS (upload.html) === */
+.strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.strategy-card {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.strategy-card:hover {
+    border-color: var(--primary);
+}
+.strategy-card input[type="radio"] {
+    margin-top: 4px;
+    accent-color: var(--primary);
+}
+.strategy-card input[type="radio"]:checked + div h3 {
+    color: var(--primary);
+}
+.strategy-card:has(input:checked) {
+    border-color: var(--primary);
+    background: #eff6ff;
+}
+.strategy-card h3 {
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+.strategy-card p {
+    font-size: 13px;
+    color: var(--text-light);
+    margin: 0;
+}
+.strategy-card.recommended {
+    border-color: var(--success);
+}
+.strategy-card.recommended:has(input:checked) {
+    background: #f0fdf4;
+}
+.strategy-card.all {
+    border-style: dashed;
+}
+
+/* === STATUS MESSAGE === */
+.status {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: none;
+}
+.status.show { display: block; }
+.status.info {
+    background: #eff6ff;
+    color: var(--primary-dark);
+    border: 1px solid #bfdbfe;
+}
+.status.success {
+    background: #f0fdf4;
+    color: var(--success);
+    border: 1px solid #bbf7d0;
+}
+.status.error {
+    background: #fef2f2;
+    color: var(--danger);
+    border: 1px solid #fecaca;
+}
+.status.loading {
+    background: #fefce8;
+    color: #a16207;
+    border: 1px solid #fef08a;
+}
+
+/* === METRICS DASHBOARD (results.html) === */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.metric-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.metric-label {
+    font-size: 13px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.metric-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.metric-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.metric-bar-fill {
+    height: 100%;
+    background: var(--success);
+    width: 0%;
+    transition: width 0.6s ease;
+}
+.metric-bar-fill.warn {
+    background: var(--warn);
+}
+.metric-bar-fill.danger {
+    background: var(--danger);
+}
+
+/* === COMPARE BLOCK (results.html) === */
+.compare-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.text-block {
+    background: var(--bg);
+    padding: 16px;
+    border-radius: 8px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: inherit;
+    font-size: 14px;
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 14px;
+    line-height: 1.5;
+}
+
+/* === HALLUCINATION + ATS LIST === */
+#hallucination-list,
+#ats-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.kw-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+.kw-tag.found {
+    background: #f0fdf4;
+    border-color: #86efac;
+    color: var(--success);
+}
+.kw-tag.missing {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: var(--danger);
+}
+.kw-tag.hallucinated {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: var(--danger);
+    font-weight: 600;
+}
+
+.empty-msg {
+    color: var(--text-light);
+    font-style: italic;
+    font-size: 14px;
+}
+
+/* === COMPARE FOUR (compare.html) === */
+.compare-four {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.compare-four .strategy-output {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.compare-four .strategy-output h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.compare-four .mini-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.compare-four .mini-metric {
+    background: var(--bg);
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: var(--text-light);
+}
+.compare-four .mini-metric strong {
+    color: var(--text);
+}
+
+/* === TABLES (compare.html, admin-stats.html) === */
+.metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.metrics-table th,
+.metrics-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.metrics-table th {
+    background: var(--bg);
+    font-weight: 600;
+    color: var(--text);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.metrics-table tr:hover td {
+    background: #f8fafc;
+}
+
+.metrics-table.small {
+    font-size: 13px;
+}
+.metrics-table.small th,
+.metrics-table.small td {
+    padding: 8px 10px;
+}
+
+/* === COUNTS LIST (admin-stats.html) === */
+.counts-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.counts-list li {
+    background: var(--bg);
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+}
+.counts-list li strong {
+    display: block;
+    font-size: 26px;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+.counts-list li span {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+/* === ACTIONS ROW === */
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+    justify-content: center;
+}
+
+/* === UTILITIES === */
+.hidden { display: none !important; }
+
+/* === FOOTER === */
+.site-footer {
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    margin-top: 40px;
+    text-align: center;
+}
+.site-footer p {
+    color: var(--text-light);
+    font-size: 13px;
+    margin: 0;
+}
+
+/* === RESPONSIVE (mobile) === */
+@media (max-width: 768px) {
+    h1 { font-size: 26px; }
+    h2 { font-size: 19px; }
+    .hero { padding: 50px 0; }
+    .hero h1 { font-size: 30px; }
+    .hero-subtitle { font-size: 16px; }
+
+    .site-header .container {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .site-header nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    .site-header nav a {
+        font-size: 14px;
+        padding: 4px 8px;
+    }
+
+    .compare-block,
+    .compare-four {
+        grid-template-columns: 1fr;
+    }
+
+    .card { padding: 18px; }
+    .feature-card { padding: 20px; }
+
+    .metric-value { font-size: 26px; }
+
+    .metrics-table {
+        font-size: 12px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .strategy-grid {
+        grid-template-columns: 1fr;
+    }
+    .btn { width: 100%; }
+    .actions .btn { width: 100%; }
+}
