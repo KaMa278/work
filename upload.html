@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload — Resume AI Tailor</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">Resume AI Tailor</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="upload.html" class="active">Try it</a>
+                <a href="compare.html">Compare</a>
+                <a href="admin-stats.html">Stats</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Tailor your resume</h1>
+            <p class="page-intro">
+                Upload your resume, paste the job description, choose a strategy,
+                and run the AI.
+            </p>
+
+            <form id="tailor-form" class="card">
+                <!-- Step 1 -->
+                <div class="form-step">
+                    <h2><span class="step-num">1</span> API key</h2>
+                    <p class="hint">
+                        Get your free Grok API key at
+                        <a href="https://console.x.ai" target="_blank">console.x.ai</a>.
+                        Stored locally in your browser only.
+                    </p>
+                    <input
+                        type="password"
+                        id="api-key"
+                        placeholder="xai-..."
+                        autocomplete="off"
+                    >
+                </div>
+
+                <!-- Step 2 -->
+                <div class="form-step">
+                    <h2><span class="step-num">2</span> Upload your resume</h2>
+                    <p class="hint">PDF or DOCX format. Max ~5 MB.</p>
+                    <input
+                        type="file"
+                        id="resume-file"
+                        accept=".pdf,.docx"
+                    >
+                    <div id="resume-preview" class="text-preview hidden">
+                        <strong>Parsed resume preview:</strong>
+                        <pre id="resume-text"></pre>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="form-step">
+                    <h2><span class="step-num">3</span> Paste the job description</h2>
+                    <textarea
+                        id="job-description"
+                        rows="10"
+                        placeholder="Paste the full job description here..."
+                    ></textarea>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="form-step">
+                    <h2><span class="step-num">4</span> Choose strategy</h2>
+                    <div class="strategy-grid">
+                        <label class="strategy-card">
+                            <input type="radio" name="strategy" value="baseline">
+                            <div>
+                                <h3>Baseline</h3>
+                                <p>No AI. Original resume only. Control group.</p>
+                            </div>
+                        </label>
+                        <label class="strategy-card">
+                            <input type="radio" name="strategy" value="naive">
+                            <div>
+                                <h3>Naive AI</h3>
+                                <p>Simple prompt: "Tailor this resume to the job."</p>
+                            </div>
+                        </label>
+                        <label class="strategy-card">
+                            <input type="radio" name="strategy" value="ats">
+                            <div>
+                                <h3>ATS-Optimized</h3>
+                                <p>Focus on keyword coverage from the job description.</p>
+                            </div>
+                        </label>
+                        <label class="strategy-card recommended">
+                            <input type="radio" name="strategy" value="ats_antihall" checked>
+                            <div>
+                                <h3>ATS + Anti-Hallucination ★</h3>
+                                <p>ATS keywords + strict factual integrity rules.</p>
+                            </div>
+                        </label>
+                        <label class="strategy-card all">
+                            <input type="radio" name="strategy" value="all">
+                            <div>
+                                <h3>Compare all four</h3>
+                                <p>Run all strategies and compare results side by side.</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="form-step">
+                    <button type="submit" id="run-btn" class="btn btn-primary btn-lg">
+                        Run AI tailoring →
+                    </button>
+                    <div id="status" class="status"></div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Resume AI Tailor — Bachelor Thesis Project, RNU 42484</p>
+        </div>
+    </footer>
+
+    <!-- External libraries (PDF.js + mammoth.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+
+    <!-- Our modules -->
+    <script src="js/storage.js"></script>
+    <script src="js/parser.js"></script>
+    <script src="js/prompts.js"></script>
+    <script src="js/metrics.js"></script>
+    <script src="js/grok-api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
