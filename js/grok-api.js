@@ -1,7 +1,7 @@
 const GrokAPI = {
 
     ENDPOINT: 'https://api.x.ai/v1/chat/completions',
-    MODEL: 'grok-2-latest',
+    MODEL: 'grok-4-latest',
 
     async call(prompt, apiKey) {
         if (!apiKey) throw new Error('API key is missing. Paste it on the upload page.');
