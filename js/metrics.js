@@ -1,17 +1,8 @@
-/* ============================================================
-   metrics.js
-   Четыре метрики из плана тезисов, Глава 3.1:
-   1. ATS keyword coverage (%)
-   2. Hallucination rate (%)
-   3. Tailoring score (1-5)
-   4. Readability — Flesch Reading Ease
-   ============================================================ */
 
 const Metrics = {
 
     // === ATS KEYWORD COVERAGE ===
-    // Извлекаем важные ключевые слова из JD (TF-IDF + curated list)
-    // и считаем сколько из них встречается в резюме.
+
     atsCoverage(resume, jobDescription) {
         const keywords = this.extractKeywords(jobDescription);
         if (keywords.length === 0) return { score: 0, found: [], missing: [], keywords: [] };
@@ -32,7 +23,6 @@ const Metrics = {
         return { score, found, missing, keywords };
     },
 
-    // Извлечение ключевых слов из JD (упрощённый TF-IDF + tech-stop-words)
     extractKeywords(jobDescription) {
         const stopWords = new Set([
             'the','a','an','and','or','but','for','of','in','on','to','from','with',
@@ -56,7 +46,6 @@ const Metrics = {
         const freq = {};
         words.forEach(w => { freq[w] = (freq[w] || 0) + 1; });
 
-        // Curated tech-list (повышаем приоритет если есть)
         const techPatterns = [
             'javascript','python','java','typescript','react','angular','vue','node',
             'sql','nosql','mongodb','postgresql','mysql','redis','docker','kubernetes',
@@ -68,7 +57,6 @@ const Metrics = {
             'ux','ui','user research','wireframe','prototype','figma','sketch'
         ];
 
-        // Берём топ-15 по частоте + всё что попало из tech-листа
         const ranked = Object.entries(freq)
             .sort((a, b) => b[1] - a[1])
             .map(([word]) => word);
@@ -76,46 +64,34 @@ const Metrics = {
         const top = ranked.slice(0, 15);
         const techFound = techPatterns.filter(p => jobDescription.toLowerCase().includes(p));
 
-        // Объединяем без дубликатов
         const combined = Array.from(new Set([...techFound, ...top]));
         return combined.slice(0, 20); // максимум 20 ключевых слов
     },
 
     // === HALLUCINATION RATE ===
-    // Алгоритмическая проверка: ищем в output "сущности"
-    // (числа, годы, аббревиатуры заглавными, компании, технологии),
-    // которых нет в оригинальном резюме.
+
     hallucinationRate(originalResume, tailoredResume) {
         if (!tailoredResume) return { score: 0, hallucinated: [], totalChecked: 0 };
 
         const original = originalResume.toLowerCase();
 
-        // Извлекаем "проверяемые факты" из tailored:
-        // 1) Годы (4-digit numbers 19xx-20xx)
-        // 2) Аббревиатуры (2-5 заглавных букв)
-        // 3) CamelCase / PascalCase слова (имена технологий, компаний)
-        // 4) Слова с цифрами (Python3, ES6, HTML5)
+ий, компаний)
         const facts = new Set();
 
-        // Годы
         const years = tailoredResume.match(/\b(19|20)\d{2}\b/g) || [];
         years.forEach(y => facts.add(y));
 
-        // Аббревиатуры (2-5 заглавных букв подряд)
         const abbrevs = tailoredResume.match(/\b[A-Z]{2,5}\b/g) || [];
         abbrevs.forEach(a => facts.add(a));
 
-        // CamelCase / PascalCase (имена: JavaScript, PostgreSQL, etc)
         const camels = tailoredResume.match(/\b[A-Z][a-z]+(?:[A-Z][a-z]+)+\b/g) || [];
         camels.forEach(c => facts.add(c));
 
-        // Слова с цифрами в середине/конце (Python3, ES6)
         const techWithDigits = tailoredResume.match(/\b[A-Za-z]+\d+\b/g) || [];
         techWithDigits.forEach(t => facts.add(t));
 
         if (facts.size === 0) return { score: 0, hallucinated: [], totalChecked: 0 };
 
-        // Проверяем каждый "факт" — есть ли он в оригинале
         const hallucinated = [];
         facts.forEach(fact => {
             if (!original.includes(fact.toLowerCase())) {
@@ -130,13 +106,9 @@ const Metrics = {
             totalChecked: facts.size
         };
     },
-
-    // === TAILORING SCORE (1-5) ===
-    // Считаем edit distance / original length, нормализуем в шкалу 1-5.
     tailoringScore(originalResume, tailoredResume) {
         if (!tailoredResume || tailoredResume === originalResume) return 1.0;
 
-        // Упрощённая метрика: word-level Jaccard distance
         const wordsOrig = new Set(originalResume.toLowerCase().split(/\s+/).filter(w => w.length > 2));
         const wordsTail = new Set(tailoredResume.toLowerCase().split(/\s+/).filter(w => w.length > 2));
 
@@ -148,7 +120,6 @@ const Metrics = {
         const similarity = intersection.size / union.size;
         const distance = 1 - similarity; // 0 = identical, 1 = totally different
 
-        // Маппинг 0..1 → 1..5
         const score = 1 + distance * 4;
         return Math.round(score * 10) / 10;
     },
@@ -180,7 +151,7 @@ const Metrics = {
         return matches ? matches.length : 1;
     },
 
-    // === ВСЁ ВМЕСТЕ ===
+   
     computeAll(originalResume, tailoredResume, jobDescription) {
         // Если tailored пустой (baseline), используем original
         const output = tailoredResume || originalResume;
