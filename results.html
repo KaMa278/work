@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results — Resume AI Tailor</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">Resume AI Tailor</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="upload.html">Try it</a>
+                <a href="compare.html">Compare</a>
+                <a href="admin-stats.html">Stats</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Tailoring results</h1>
+            <p id="strategy-label" class="page-intro">Strategy: —</p>
+
+            <!-- Metrics dashboard -->
+            <section class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">ATS Coverage</div>
+                    <div class="metric-value" id="m-ats">—%</div>
+                    <div class="metric-bar"><div id="m-ats-bar" class="metric-bar-fill"></div></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Hallucination Rate</div>
+                    <div class="metric-value" id="m-hall">—%</div>
+                    <div class="metric-bar"><div id="m-hall-bar" class="metric-bar-fill warn"></div></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Tailoring Score</div>
+                    <div class="metric-value" id="m-tailor">—/5</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Readability (Flesch)</div>
+                    <div class="metric-value" id="m-flesch">—</div>
+                </div>
+            </section>
+
+            <!-- Side-by-side comparison -->
+            <section class="compare-block">
+                <div class="card">
+                    <h2>Original resume</h2>
+                    <pre id="original-text" class="text-block"></pre>
+                </div>
+                <div class="card">
+                    <h2>Tailored resume</h2>
+                    <pre id="tailored-text" class="text-block"></pre>
+                    <button id="copy-btn" class="btn">Copy to clipboard</button>
+                </div>
+            </section>
+
+            <!-- Hallucination report -->
+            <section class="card">
+                <h2>Hallucination report</h2>
+                <p class="hint">
+                    Words and phrases in the tailored resume that do NOT appear in
+                    the original resume.
+                </p>
+                <div id="hallucination-list"></div>
+            </section>
+
+            <!-- ATS keyword report -->
+            <section class="card">
+                <h2>ATS keyword report</h2>
+                <p class="hint">
+                    Important keywords from the job description and whether they
+                    appear in the tailored resume.
+                </p>
+                <div id="ats-list"></div>
+            </section>
+
+            <div class="actions">
+                <a href="upload.html" class="btn">← Try another job</a>
+                <a href="compare.html" class="btn">Compare strategies →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Resume AI Tailor — Bachelor Thesis Project, RNU 42484</p>
+        </div>
+    </footer>
+
+    <script src="js/storage.js"></script>
+    <script src="js/metrics.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
