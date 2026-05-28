@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare strategies — Resume AI Tailor</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">Resume AI Tailor</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="upload.html">Try it</a>
+                <a href="compare.html" class="active">Compare</a>
+                <a href="admin-stats.html">Stats</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Compare four strategies</h1>
+            <p class="page-intro">
+                Side-by-side comparison of all prompt engineering strategies for
+                your latest tailoring run.
+            </p>
+
+            <div id="no-data" class="card hidden">
+                <p>
+                    No comparison data found. Go to the
+                    <a href="upload.html">Upload page</a> and select
+                    "Compare all four" as the strategy.
+                </p>
+            </div>
+
+            <!-- Summary table -->
+            <section class="card" id="summary-section">
+                <h2>Summary table</h2>
+                <table class="metrics-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Baseline</th>
+                            <th>Naive AI</th>
+                            <th>ATS-Optimized</th>
+                            <th>ATS + Anti-Hall</th>
+                        </tr>
+                    </thead>
+                    <tbody id="summary-body">
+                        <!-- filled by JS -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Side-by-side resume outputs -->
+            <section class="compare-four" id="four-outputs">
+                <!-- filled by JS -->
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Resume AI Tailor — Bachelor Thesis Project, RNU 42484</p>
+        </div>
+    </footer>
+
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
