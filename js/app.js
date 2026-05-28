@@ -355,4 +355,38 @@
             downloadBlob(blob, 'experiments.csv');
         });
 
-        // Cl
+        // Clear all data
+        $('#clear-all')?.addEventListener('click', () => {
+            if (!confirm('Delete ALL experiments, resumes, job descriptions, and reviews? This cannot be undone.')) return;
+            Storage.clearAll();
+            window.location.reload();
+        });
+    }
+
+    // ============================================================
+    // HELPER: download a Blob as a file
+    // ============================================================
+    function downloadBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    // ============================================================
+    // ROUTER: detect current page and run the right init
+    // Each init() returns early if its required DOM nodes are missing,
+    // so it is safe to call all of them.
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', () => {
+        try { initUploadPage();     } catch (e) { console.error('initUploadPage error:', e); }
+        try { initResultsPage();    } catch (e) { console.error('initResultsPage error:', e); }
+        try { initComparePage();    } catch (e) { console.error('initComparePage error:', e); }
+        try { initAdminStatsPage(); } catch (e) { console.error('initAdminStatsPage error:', e); }
+    });
+
+})();
