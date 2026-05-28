@@ -190,6 +190,13 @@ const Metrics = {
         const tailor = tailoredResume ? this.tailoringScore(originalResume, tailoredResume) : 1.0;
         const flesch = this.fleschReadingEase(output);
 
+        // Combined score из Главы 1.3 плана тезисов:
+        // S = α × ATS_coverage − β × hallucination_rate
+        // α = 1.0, β = 1.5 (галлюцинации штрафуем сильнее ATS-выгоды)
+        const alpha = 1.0;
+        const beta  = 1.5;
+        const combined = Math.round((alpha * ats.score) - (beta * hall.score));
+
         return {
             ats_score: ats.score,
             ats_found: ats.found,
@@ -199,7 +206,8 @@ const Metrics = {
             hallucinated_facts: hall.hallucinated,
             hallucination_checked: hall.totalChecked,
             tailoring_score: tailor,
-            flesch_score: flesch
+            flesch_score: flesch,
+            combined_score: combined
         };
     }
 };
